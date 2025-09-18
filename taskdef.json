@@ -1,0 +1,47 @@
+{
+    "family": "<TASK_DEFINITION_FAMILY>",
+    "containerDefinitions": [
+        {
+            "name": "<CONTAINER_NAME>",
+            "image": "<IMAGE_NAME>",
+            "cpu": <CPU_UNITS>,
+            "memory": <MEMORY_UNITS>,
+            "portMappings": [
+                {
+                    "containerPort": <SERVICE_PORT>,
+                    "hostPort": <SERVICE_PORT>,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "REGION",
+                    "value": "<AWS_REGION>"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/<TASK_DEFINITION_FAMILY>",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "<AWS_REGION>",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "taskRoleArn": "<ECS_TASK_ROLE>",
+    "executionRoleArn": "<ECS_ROLE>",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "<CPU_UNITS>",
+    "memory": "<MEMORY_UNITS>",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}
